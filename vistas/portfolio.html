@@ -1,0 +1,53 @@
+<!-- Header -->
+<div class="mini">
+</div>
+
+    <!-- Portfolio Grid Section -->
+     <section id="portfolio" class="bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Recursos</h2>
+                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                </div>
+            </div>
+
+
+            <div class="row" id="album" >
+              <!-- <div class="col-lg-12 text-center">
+               <div class="col-lg-4" style="background-color:#;">LOGO</div>
+               <div class="col-lg-8" style="background-color:#;">
+                 <div class="col-lg-4" style="background-color:#;">Asociacion</div>
+                 <div class="col-lg-4" style="background-color:#;">Email y web</div>
+                 <div class="col-lg-8" style="background-color:#;">Horario y descripcion</div>
+               </div>
+             </div> -->
+             <div  class="col-lg-12 text-center">
+             Buscador: Nombre <input type="text" ng-model="search.Nombre">
+             Email:  <input type="text" ng-model="search.Email">
+             Ambito:  <input type="text" ng-model="search.Ambito">
+             Horario:  <input type="text" ng-model="search.Horario">
+           </div>
+             <div class="col-lg-12" ng-repeat="item in listaAsociaciones | filter : search" style=" padding-top:25px; padding-bottom:25px;">
+              <div class="col-lg-4" style="background-color:#;">
+                  <img ng-src="{{item.img}}" class="img-responsive" alt="">
+              </div>
+              <div class="col-lg-8" style="background-color:#;">
+                <div class="col-lg-4 text-center" style="background-color:#;">
+                  <h3>{{item.Nombre}}</h3><br>
+                  <a href={{item.Web}} target="_blank">Sitio web</a>
+                </div>
+                <div class="col-lg-8" style="line-height:2;">
+                  <b>Email:</b> {{item.Email}}<br>
+                  <b>Horario</b>{{item.Horario}}<br>
+                  <b>Telefono:</b><br>
+                  <b>Ambito:</b><br>
+                  <b>Descripción:</b>
+                </div>
+
+
+              </div>
+            </div>
+
+        </div>
+    </section>

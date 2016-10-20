@@ -1,0 +1,56 @@
+<!-- Header -->
+<div class="mini">
+</div>  
+
+ <!-- Cal Section -->
+
+     <section id="Calendario">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Calendario</h2>
+                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div id='loading'>loading...</div>
+
+	            <div id='calendar'></div>
+
+            </div>
+        </div>
+    </section>
+
+        <!-- Calendario   -->
+    <link href='fc/fullcalendar.css' rel='stylesheet' />
+    <link href='fc/fullcalendar.print.css' rel='stylesheet' media='print' />
+    <script src='fc/lib/moment.min.js'></script>
+<!--    <script src='fc/lib/jquery.min.js'></script>-->
+    <script src='fc/fullcalendar.min.js'></script>
+    <script src='fc/gcal.js'></script>
+    <script src='fc/lang/es.js'></script>
+
+    <script>
+
+    $(document).ready(function() {
+
+        $('#calendar').fullCalendar({
+            lang: 'es',
+            googleCalendarApiKey: 'AIzaSyBQHoehNb8upaelzpX2-QpSYkBayy2Ohdw',
+            events: {
+            googleCalendarId: '8vjocrefaa1dmbao01l8rmg10s@group.calendar.google.com',
+            },
+            eventClick: function(event) {
+                // opens events in a popup window
+                window.open(event.url, 'gcalevent', 'width=700,height=600');
+                return false;
+            },
+            loading: function(bool) {
+                $('#loading').toggle(bool);
+            }
+
+        });
+
+    });
+
+    </script>
