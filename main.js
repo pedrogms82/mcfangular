@@ -63,41 +63,59 @@ function AcercaController ($scope){
 			$scope.headerstyle = "background-image:  url('img/header-nav.jpg')";
 }
 
-PortfolioController.$inject = ['$scope'];
-function PortfolioController ($scope){
+PortfolioController.$inject = ['$scope', '$http'];
+function PortfolioController ($scope, $http){
 			// $scope.message = 'Esta es la página de "Portfolio"';
 			//
 			// var Asociaciones = this;
 			//
 			// Asociaciones.items = GetAsociaciones.getRecursos();
+//
+//
+//											//var vm = this;
+//
+// var url = "http://appmcf.ayudapyme.es/GETALLREC";
+// var ajaxrec = new XMLHttpRequest();
+//
+//							        function ReciboDatos (){
+//							                if (ajaxrec.readyState == 4 && ajaxrec.status == 200){
+//							                    var datos = ajaxrec.responseText;
+//								                var Json = JSON.parse(datos);  
+//																	//console.log("Json: ", Json);
+//																	$scope.listaAsociaciones = [];
+//																	for (var i=0; i < Json.Recursos.length;i++){
+//																		  Json.Recursos[i].img = "img/recurso/"+Json.Recursos[i].Id+"/main.jpg"
+//																			$scope.listaAsociaciones.push(Json.Recursos[i]);
+//																		}
+//																	console.log("Scope Json: ", $scope.listaAsociaciones);
+//																	$scope.$apply();
+//							                }
+//							        }
+//
+//							        ajaxrec.onreadystatechange = ReciboDatos;
+//							        ajaxrec.open("GET",url);
+//							     //   ajaxrec.setRequestHeader('Content-type', 'text/json; charset=UTF-8')
+//							        ajaxrec.send();
 
 
-											//var vm = this;
-
-										  var url = "http://appmcf.ayudapyme.es/GETALLREC";
-							        var ajaxrec = new XMLHttpRequest();
-
-							        function ReciboDatos (){
-							                if (ajaxrec.readyState == 4 && ajaxrec.status == 200){
-							                    var datos = ajaxrec.responseText;
-								                  var Json = JSON.parse(datos);
-																	//console.log("Json: ", Json);
-																	$scope.listaAsociaciones = [];
-																	for (var i=0; i < Json.Recursos.length;i++){
-																		  Json.Recursos[i].img = "img/recurso/"+Json.Recursos[i].Id+"/main.jpg"
-																			$scope.listaAsociaciones.push(Json.Recursos[i]);
-																		}
-																	console.log("Scope Json: ", $scope.listaAsociaciones);
-																	$scope.$apply();
-							                }
-							        }
-
-							        ajaxrec.onreadystatechange = ReciboDatos;
-							        ajaxrec.open("GET",url);
-							     //   ajaxrec.setRequestHeader('Content-type', 'text/json; charset=UTF-8')
-							        ajaxrec.send();
-
-
+    $http({
+        method : "GET",
+        url : "http://appmcf.ayudapyme.es/GETALLREC"
+    }).then(function mySucces(response) {
+        var datos = response.data;
+        var Json = JSON.parse(datos);
+        $scope.listaAsociaciones = [];
+        
+        for (var i=0; i < Json.Recursos.length;i++){
+		Json.Recursos[i].img = "img/recurso/"+Json.Recursos[i].Id+"/main.jpg"
+		$scope.listaAsociaciones.push(Json.Recursos[i]);
+        }
+		
+        console.log("Scope Json: ", $scope.listaAsociaciones);
+        
+    }, function myError(response) {
+        $scope.eRRor = response.statusText;
+    });
 
 
 
