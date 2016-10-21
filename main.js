@@ -48,121 +48,68 @@ var angularRoutingApp = angular.module('angularRoutingApp', ['ngRoute'])
 												.controller('mapaController', MapaController)
 												.controller('contactoController', ContactoController);
 
-
-// Configuración de las rutas
-
-
-
 // Funciones de controladores
 MainController.$inject = ['$scope'];
 function MainController ($scope){
 			$scope.message = 'Esta es la página de "Home"';
 }
+
 AcercaController.$inject = ['$scope'];
 function AcercaController ($scope){
-			$scope.headerstyle = "background-image:  url('img/header-nav.jpg')";
+			$scope.message = 'Esta es la página acerca';
 }
 
 PortfolioController.$inject = ['$scope', '$http'];
 function PortfolioController ($scope, $http){
-			// $scope.message = 'Esta es la página de "Portfolio"';
-			//
-			// var Asociaciones = this;
-			//
-			// Asociaciones.items = GetAsociaciones.getRecursos();
-//
-//
-//											//var vm = this;
-//
-// var url = "http://appmcf.ayudapyme.es/GETALLREC";
-// var ajaxrec = new XMLHttpRequest();
-//
-//							        function ReciboDatos (){
-//							                if (ajaxrec.readyState == 4 && ajaxrec.status == 200){
-//							                    var datos = ajaxrec.responseText;
-//								                var Json = JSON.parse(datos);  
-//																	//console.log("Json: ", Json);
-//																	$scope.listaAsociaciones = [];
-//																	for (var i=0; i < Json.Recursos.length;i++){
-//																		  Json.Recursos[i].img = "img/recurso/"+Json.Recursos[i].Id+"/main.jpg"
-//																			$scope.listaAsociaciones.push(Json.Recursos[i]);
-//																		}
-//																	console.log("Scope Json: ", $scope.listaAsociaciones);
-//																	$scope.$apply();
-//							                }
-//							        }
-//
-//							        ajaxrec.onreadystatechange = ReciboDatos;
-//							        ajaxrec.open("GET",url);
-//							     //   ajaxrec.setRequestHeader('Content-type', 'text/json; charset=UTF-8')
-//							        ajaxrec.send();
-
 
     $http({
         method : "GET",
         url : "http://appmcf.ayudapyme.es/GETALLREC"
-    }).then(function mySucces(response) {
-        var datos = response.data;
-        var Json = JSON.parse(datos);
+    		}).then(function mySucces(response) {
+
+				var datos = response.data;
+
         $scope.listaAsociaciones = [];
-        
-        for (var i=0; i < Json.Recursos.length;i++){
-		Json.Recursos[i].img = "img/recurso/"+Json.Recursos[i].Id+"/main.jpg"
-		$scope.listaAsociaciones.push(Json.Recursos[i]);
+
+        for (var i=0; i < datos.Recursos.length;i++){
+					datos.Recursos[i].img = "img/recurso/"+datos.Recursos[i].Id+"/main.jpg"
+					$scope.listaAsociaciones.push(datos.Recursos[i]);
         }
-		
+
         console.log("Scope Json: ", $scope.listaAsociaciones);
-        
+
     }, function myError(response) {
         $scope.eRRor = response.statusText;
     });
-
-
-
 }
+
 ServiciosController.$inject = ['$scope'];
 function ServiciosController ($scope){
 			$scope.message = 'Esta es la página de "Servicios"';
 }
+
 EquipoController.$inject = ['$scope'];
 function EquipoController ($scope){
 			$scope.message = 'Esta es la página de "Equipo"';
 }
+
 CalendarioController.$inject = ['$scope'];
 function CalendarioController ($scope){
 			$scope.message = 'Esta es la página de "Calendario"';
 }
+
 MapaController.$inject = ['$scope'];
 function MapaController ($scope){
 			$scope.message = 'Esta es la página de "Mapa"';
 }
+
 ContactoController.$inject = ['$scope'];
 function ContactoController ($scope){
 			$scope.message = 'Esta es la página de "Contacto"';
 }
+
 GetAsociaciones.$inject = ['$scope'];
 function GetAsociaciones($scope) {
-
-								var vm = this;
-
-								vm.getRecursos = function () {
-
-							  var url = "http://appmcf.ayudapyme.es/GETALLREC";
-				        var ajaxrec = new XMLHttpRequest();
-
-				        function ReciboDatos (){
-				                if (ajaxrec.readyState == 4 && ajaxrec.status == 200){
-				                    var datos = ajaxrec.responseText;
-					                  var Json = JSON.parse(datos);
-														return Json;
-				                }
-				        }
-
-				        ajaxrec.onreadystatechange = ReciboDatos;
-				        ajaxrec.open("GET",url);
-				     //   ajaxrec.setRequestHeader('Content-type', 'text/json; charset=UTF-8')
-				        ajaxrec.send();
-
-							}
+		
 
 }
